@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financial Planning Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="p-6 md:p-12">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <header class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800">
+          Financial Planning Calculator
+        </h1>
+        <p class="mt-4 text-lg text-gray-600">
+          Plan your financial future with SIP and SWP calculations and
+          visualizations.
+        </p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- SIP Calculator Section -->
+        <div class="card flex flex-col items-center">
+          <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+            SIP Calculator
+          </h2>
+          <div class="w-full space-y-6">
+            <div>
+              <label
+                for="sipMonthlyInvestment"
+                class="block text-sm font-medium text-gray-700"
+                >Monthly Investment (₹)</label
+              >
+              <input
+                type="number"
+                id="sipMonthlyInvestment"
+                value="10000"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                for="sipExpectedReturns"
+                class="block text-sm font-medium text-gray-700"
+                >Expected Annual Returns (%)</label
+              >
+              <input
+                type="number"
+                id="sipExpectedReturns"
+                value="12"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                for="sipDuration"
+                class="block text-sm font-medium text-gray-700"
+                >Investment Duration (Years)</label
+              >
+              <input
+                type="number"
+                id="sipDuration"
+                value="10"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <button
+              id="calculateSip"
+              class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
+            >
+              Calculate SIP
+            </button>
+          </div>
+
+          <div id="sipResults" class="mt-8 w-full hidden">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Results</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+              <div class="bg-gray-100 p-6 rounded-xl shadow-md">
+                <p
+                  class="text-2xl font-bold text-blue-600"
+                  id="sipTotalInvestment"
+                ></p>
+                <p class="text-sm text-gray-500">Total Investment</p>
+              </div>
+              <div class="bg-gray-100 p-6 rounded-xl shadow-md">
+                <p
+                  class="text-2xl font-bold text-green-600"
+                  id="sipTotalValue"
+                ></p>
+                <p class="text-sm text-gray-500">Total Value</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full mt-8 hidden" id="sipChartContainer">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Investment Growth Over Time
+            </h3>
+            <canvas id="sipChart"></canvas>
+          </div>
+        </div>
+
+        <!-- SWP Calculator Section -->
+        <div class="card flex flex-col items-center">
+          <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+            SWP Calculator
+          </h2>
+          <div class="w-full space-y-6">
+            <div>
+              <label
+                for="swpCorpus"
+                class="block text-sm font-medium text-gray-700"
+                >Total Corpus (₹)</label
+              >
+              <input
+                type="number"
+                id="swpCorpus"
+                value="5000000"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                for="swpWithdrawal"
+                class="block text-sm font-medium text-gray-700"
+                >Monthly Withdrawal (₹)</label
+              >
+              <input
+                type="number"
+                id="swpWithdrawal"
+                value="30000"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                for="swpReturns"
+                class="block text-sm font-medium text-gray-700"
+                >Expected Annual Returns (%)</label
+              >
+              <input
+                type="number"
+                id="swpReturns"
+                value="8"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                for="swpDuration"
+                class="block text-sm font-medium text-gray-700"
+                >Withdrawal Duration (Years)</label
+              >
+              <input
+                type="number"
+                id="swpDuration"
+                value="20"
+                class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <button
+              id="calculateSwp"
+              class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
+            >
+              Calculate SWP
+            </button>
+          </div>
+
+          <div id="swpResults" class="mt-8 w-full hidden">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Results</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+              <div class="bg-gray-100 p-6 rounded-xl shadow-md">
+                <p
+                  class="text-2xl font-bold text-blue-600"
+                  id="swpTotalWithdrawals"
+                ></p>
+                <p class="text-sm text-gray-500">Total Withdrawals</p>
+              </div>
+              <div class="bg-gray-100 p-6 rounded-xl shadow-md">
+                <p
+                  class="text-2xl font-bold text-green-600"
+                  id="swpRemainingCorpus"
+                ></p>
+                <p class="text-sm text-gray-500">Remaining Corpus</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full mt-8 hidden" id="swpChartContainer">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Corpus Over Time
+            </h3>
+            <canvas id="swpChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
