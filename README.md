@@ -33,12 +33,14 @@ Simply open the `index.html` file in your preferred web browser. No server is re
 ## Using the Calculators
 
 ### SIP Calculator
+
 1. Enter your desired **Monthly Investment**.
 2. Input the **Expected Annual Returns** (in percentage).
 3. Specify the **Investment Duration** (in years).
 4. Click **"Calculate SIP"** to see your total investment, the final value, and a growth chart.
 
 ### SWP Calculator
+
 1. Enter your **Total Corpus**.
 2. Input the **Monthly Withdrawal amount**.
 3. Specify the **Expected Annual Returns** (in percentage) on the corpus.
